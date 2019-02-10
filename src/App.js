@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import PropTypes from 'prop-types'
 
 class App extends Component {
+
+  static propTypes = {
+    text: PropTypes.string.isRequired
+  };
+
+
   render() {
     return (
       <div className="App">
