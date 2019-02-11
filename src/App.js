@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+import Present from './Present';
 
 class App extends Component {
-
-  static propTypes = {
-    text: PropTypes.string.isRequired
-  };
-
 
   render() {
     return (
@@ -26,6 +22,14 @@ class App extends Component {
           >
             Learn React
           </a>
+
+
+          <form>
+          <input />
+        </form>
+
+        <Present text="My text"/>
+        
         </header>
       </div>
     );
