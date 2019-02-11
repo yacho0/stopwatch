@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import PropTypes from 'prop-types';
-import Present from './Present';
 
 class App extends Component {
 
@@ -10,26 +8,64 @@ class App extends Component {
     super(props);
 
     this.state = {
-      secound : 0,
-      minute : 0
+      flaga: 0,
+      desec: 0,
+      secound: 0,
+      minute: 0,
+      hour: 0
     }
   };
 
-  tack () {
+  tickDesec() {
     this.setState(state => ({
-      secound : (state.secound + 1)%3
+      desec: (state.desec + 1) % 10
     }));
+  }
 
-    // if(state.secound === 3){
-      this.setState(state => ({
-        minute : (state.secound)/3
-      }));
-    // }
+  tickSec() {
+    this.setState(state => ({
+      secound: (state.secound + 1) % 60
+    }));
 
   }
 
-  componentDidMount (){
-    this.interval = setInterval(() => this.tack(), 1000);
+  tickMin() {
+    this.setState(state => ({
+      minute: (state.minute + 1) % 60
+    }));
+  }
+
+  tickHour() {
+    this.setState(state => ({
+      hour: (state.hour + 1) % 24
+    }));
+  }
+
+
+  componentDidMount() {
+    const ds = 100;
+    const sec = 1000;
+    const min = (60 * sec);
+    const hour = (60 * min);
+
+    // if (this.state.flaga === 100) {
+      console.log("i am in");
+
+      this.interval = setInterval(() => this.tickDesec(), ds);
+      this.interval = setInterval(() => this.tickSec(), sec);
+      this.interval = setInterval(() => this.tickMin(), min);
+      this.interval = setInterval(() => this.tickHour(), hour);
+    // }
+  }
+
+  controlStopwatcher() {
+
+    this.setState(state => ({
+      // flaga: !(state.flaga)
+      flaga: 100
+    })
+    );
+
   }
 
   render() {
@@ -37,28 +73,11 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
 
+          <p>{this.state.desec} : {this.state.secound} : {this.state.minute} : {this.state.hour}</p>
 
-          <form>
-            <input />
-          </form>
-
-          <Present text="My text" />
-
-          <p>{this.state.minute}</p>
-          <p>{this.state.secound}</p>
-
+          {/* <button onClick={this.controlStopwatcher.bind(this)}>Function</button> */}
+          {/* <p>{this.state.flaga}</p> */}
         </header>
       </div>
     );
