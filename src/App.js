@@ -6,6 +6,32 @@ import Present from './Present';
 
 class App extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      secound : 0,
+      minute : 0
+    }
+  };
+
+  tack () {
+    this.setState(state => ({
+      secound : (state.secound + 1)%3
+    }));
+
+    // if(state.secound === 3){
+      this.setState(state => ({
+        minute : (state.secound)/3
+      }));
+    // }
+
+  }
+
+  componentDidMount (){
+    this.interval = setInterval(() => this.tack(), 1000);
+  }
+
   render() {
     return (
       <div className="App">
@@ -25,11 +51,14 @@ class App extends Component {
 
 
           <form>
-          <input />
-        </form>
+            <input />
+          </form>
 
-        <Present text="My text"/>
-        
+          <Present text="My text" />
+
+          <p>{this.state.minute}</p>
+          <p>{this.state.secound}</p>
+
         </header>
       </div>
     );
