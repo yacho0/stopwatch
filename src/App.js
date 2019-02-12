@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+
+const ComponentFunction = (props) => {
+
+const numberInside = (props.number + 1);
+
+  return <p>{numberInside}</p>
+
+}
+
 class App extends Component {
   render() {
     return (
@@ -19,7 +28,9 @@ class App extends Component {
           >
             Learn React
           </a>
-          <p>Hejjsaddsfsfsdas</p>
+
+            <ComponentFunction number={45} />
+
         </header>
       </div>
     );
