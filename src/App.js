@@ -3,13 +3,18 @@ import logo from './logo.svg';
 import './App.css';
 import Interface from './Interface';
 
+var set1 = '';
+var set2 = '';
+var set3 = '';
+var set4 = '';
+
 class App extends Component {
 
   constructor(props) {
     super(props);
 
     this.state = {
-      flaga: 0,     //nie wiadomo do czego ta flaga?
+      run: true,  //shoudl be false on the start
       desec: 0,
       secound: 0,
       minute: 0,
@@ -17,24 +22,59 @@ class App extends Component {
     }
   };
 
-  startWatch(event){
+  constrolWatch(event) {
 
     event.preventDefault();
 
     const ds = 100;
     const sec = 1000;
-    const min = (60 * sec);
-    const hour = (60 * min);
+    const min = 60 * 1000;
+    const hour = 60 * 60 * 1000;
 
-    // if (this.state.flaga === 100) {
-      console.log("i am in");
+    console.log(this.state.run);
 
-      this.interval = setInterval(() => this.tickDesec(), ds);
-      this.interval = setInterval(() => this.tickSec(), sec);
-      this.interval = setInterval(() => this.tickMin(), min);
-      this.interval = setInterval(() => this.tickHour(), hour);
-    // }
+    this.setState((prevState) => {
+      return { run: !prevState.run }
+    });
 
+    if (this.state.run) {
+
+      set1 = setInterval(() => this.tickDesec(), ds);
+      set2 = setInterval(() => this.tickSec(), sec);
+      set3 = setInterval(() => this.tickMin(), min);
+      set4 = setInterval(() => this.tickHour(), hour);
+    } else {
+      console.log('stop');
+      clearInterval(set1);
+      clearInterval(set2);
+      clearInterval(set3);
+      clearInterval(set4);
+    }
+  }
+
+  stopWatch(event) {
+    event.preventDefault();
+
+    const {
+      run,
+      desec,
+      secound,
+      minute,
+      hour
+    } = this.state;
+
+    this.setState({
+      run : true,
+      desec : 0,
+      secound: 0,
+      minute: 0,
+      hour : 0
+    })
+
+    clearInterval(set1);
+    clearInterval(set2);
+    clearInterval(set3);
+    clearInterval(set4);
 
   }
 
@@ -63,32 +103,13 @@ class App extends Component {
     }));
   }
 
-
-  // componentDidMount() {
-
-  // }
-
-  controlStopwatcher() {
-
-    this.setState(state => ({
-      // flaga: !(state.flaga)
-      flaga: 100
-    })
-    );
-
-  }
-
   render() {
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-
-          <p>{this.state.desec} : {this.state.secound} : {this.state.minute} : {this.state.hour}</p>
-
-          {/* <button onClick={this.controlStopwatcher.bind(this)}>Function</button> */}
-          {/* <p>{this.state.flaga}</p> */}
-          <Interface startWatch={this.startWatch.bind(this)} />
+          <p>{this.state.hour} : {this.state.minute} : {this.state.secound} : {this.state.desec}</p>
+          <Interface constrolWatch={this.constrolWatch.bind(this)} stopWatch={this.stopWatch.bind(this)} />
         </header>
       </div>
     );
