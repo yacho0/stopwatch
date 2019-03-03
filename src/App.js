@@ -14,7 +14,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      run: true,  //shoudl be false on the start
+      run: true,
       desec: 0,
       secound: 0,
       minute: 0,
@@ -28,8 +28,8 @@ class App extends Component {
 
     const ds = 100;
     const sec = 1000;
-    const min = 60 * 1000;
-    const hour = 60 * 60 * 1000;
+    const min = 60000;
+    const hour = 3600000;
 
     console.log(this.state.run);
 
@@ -55,14 +55,6 @@ class App extends Component {
   stopWatch(event) {
     event.preventDefault();
 
-    const {
-      run,
-      desec,
-      secound,
-      minute,
-      hour
-    } = this.state;
-
     this.setState({
       run : true,
       desec : 0,
@@ -75,7 +67,6 @@ class App extends Component {
     clearInterval(set2);
     clearInterval(set3);
     clearInterval(set4);
-
   }
 
   tickDesec() {
