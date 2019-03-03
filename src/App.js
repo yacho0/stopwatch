@@ -15,6 +15,7 @@ class App extends Component {
 
     this.state = {
       run: true,
+      stop: false,
       desec: 0,
       secound: 0,
       minute: 0,
@@ -34,7 +35,10 @@ class App extends Component {
     console.log(this.state.run);
 
     this.setState((prevState) => {
-      return { run: !prevState.run }
+      return {
+        run: !prevState.run,
+        stop: true
+      }
     });
 
     if (this.state.run) {
@@ -56,11 +60,12 @@ class App extends Component {
     event.preventDefault();
 
     this.setState({
-      run : true,
-      desec : 0,
+      run: true,
+      stop: false,
+      desec: 0,
       secound: 0,
       minute: 0,
-      hour : 0
+      hour: 0
     })
 
     clearInterval(set1);
@@ -100,7 +105,11 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>{this.state.hour} : {this.state.minute} : {this.state.secound} : {this.state.desec}</p>
-          <Interface constrolWatch={this.constrolWatch.bind(this)} stopWatch={this.stopWatch.bind(this)} />
+          <Interface
+            stateRun={this.state.run}
+            stateStop={this.state.stop}
+            constrolWatch={this.constrolWatch.bind(this)}
+            stopWatch={this.stopWatch.bind(this)} />
         </header>
       </div>
     );

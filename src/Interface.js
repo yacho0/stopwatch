@@ -10,9 +10,9 @@ const Interface = (props) => {
     return (
         // <button onClick={props.stopWatch}>Stop</button>
         <div>
-            <img className="Play-image" src={play} alt="my image" onClick={props.constrolWatch} />
-            <img className="Pause-image" src={pause} alt="my image" onClick={props.constrolWatch} />
-            <img className="Stop-image" src={stop} alt="my image" onClick={props.stopWatch} />
+            <img style={props.stateRun ? {display : 'inline'} : {display : 'none'}} className="Play-image" src={play} alt="my image" onClick={props.constrolWatch} />
+            <img style={props.stateRun ? {display : 'none'} : {display : 'inline'}} className="Pause-image" src={pause} alt="my image" onClick={props.constrolWatch} />
+            <img style={props.stateStop ? {display : 'inline'} : {display : 'none'}} className="Stop-image" src={stop} alt="my image" onClick={props.stopWatch} />
         </div>
     );
 };
