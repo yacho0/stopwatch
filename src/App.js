@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Interface from './Interface';
 
 class App extends Component {
 
@@ -8,13 +9,34 @@ class App extends Component {
     super(props);
 
     this.state = {
-      flaga: 0,
+      flaga: 0,     //nie wiadomo do czego ta flaga?
       desec: 0,
       secound: 0,
       minute: 0,
       hour: 0
     }
   };
+
+  startWatch(event){
+
+    event.preventDefault();
+
+    const ds = 100;
+    const sec = 1000;
+    const min = (60 * sec);
+    const hour = (60 * min);
+
+    // if (this.state.flaga === 100) {
+      console.log("i am in");
+
+      this.interval = setInterval(() => this.tickDesec(), ds);
+      this.interval = setInterval(() => this.tickSec(), sec);
+      this.interval = setInterval(() => this.tickMin(), min);
+      this.interval = setInterval(() => this.tickHour(), hour);
+    // }
+
+
+  }
 
   tickDesec() {
     this.setState(state => ({
@@ -42,21 +64,9 @@ class App extends Component {
   }
 
 
-  componentDidMount() {
-    const ds = 100;
-    const sec = 1000;
-    const min = (60 * sec);
-    const hour = (60 * min);
+  // componentDidMount() {
 
-    // if (this.state.flaga === 100) {
-      console.log("i am in");
-
-      this.interval = setInterval(() => this.tickDesec(), ds);
-      this.interval = setInterval(() => this.tickSec(), sec);
-      this.interval = setInterval(() => this.tickMin(), min);
-      this.interval = setInterval(() => this.tickHour(), hour);
-    // }
-  }
+  // }
 
   controlStopwatcher() {
 
@@ -78,6 +88,7 @@ class App extends Component {
 
           {/* <button onClick={this.controlStopwatcher.bind(this)}>Function</button> */}
           {/* <p>{this.state.flaga}</p> */}
+          <Interface startWatch={this.startWatch.bind(this)} />
         </header>
       </div>
     );
