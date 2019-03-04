@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './Interface.css'
 import play from './play.png';
 import pause from './pause.png';
@@ -6,9 +7,7 @@ import stop from './stop.png';
 
 
 const Interface = (props) => {
-
     return (
-        // <button onClick={props.stopWatch}>Stop</button>
         <div>
             <img style={props.stateRun ? {display : 'inline'} : {display : 'none'}} className="Play-image" src={play} alt="my image" onClick={props.constrolWatch} />
             <img style={props.stateRun ? {display : 'none'} : {display : 'inline'}} className="Pause-image" src={pause} alt="my image" onClick={props.constrolWatch} />
@@ -16,5 +15,12 @@ const Interface = (props) => {
         </div>
     );
 };
+
+Interface.propTypes = {
+    stateRun : PropTypes.bool.isRequired,
+    stateStop : PropTypes.bool.isRequired,
+    constrolWatch : PropTypes.func.isRequired,
+    stopWatch : PropTypes.func.isRequired,
+}
 
 export default Interface;
