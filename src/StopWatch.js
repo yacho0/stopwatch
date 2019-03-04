@@ -1,13 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
 import Interface from './Interface';
-
-var set1 = '';
-var set2 = '';
-var set3 = '';
-var set4 = '';
-
 
 class StopWatch extends Component {
 
@@ -20,13 +12,22 @@ class StopWatch extends Component {
             desec: 0,
             secound: 0,
             minute: 0,
-            hour: 0
+            hour: 0,
+            start1 : 0,
+            start2 : 0,
+            start3 : 0,
+            start4 : 0,
         }
     };
 
+    // service buttons play and pause
     constrolWatch(event) {
         event.preventDefault();
 
+        var localStart1 = 0;
+        var localStart2 = 0;
+        var localStart3 = 0;
+        var localStart4 = 0;
         const ds = 100;
         const sec = 1000;
         const min = 60000;
@@ -40,19 +41,26 @@ class StopWatch extends Component {
         });
 
         if (this.state.run) {
-            set1 = setInterval(() => this.tickDesec(), ds);
-            set2 = setInterval(() => this.tickSec(), sec);
-            set3 = setInterval(() => this.tickMin(), min);
-            set4 = setInterval(() => this.tickHour(), hour);
+            localStart1 = setInterval(() => this.tickDesec(), ds);
+            localStart2 = setInterval(() => this.tickSec(), sec);
+            localStart3 = setInterval(() => this.tickMin(), min);
+            localStart4 = setInterval(() => this.tickHour(), hour);
+
+            this.setState({
+                start1 : localStart1,
+                start2 : localStart2,
+                start3 : localStart3,
+                start4 : localStart4,
+            })
         } else {
-            console.log('stop');
-            clearInterval(set1);
-            clearInterval(set2);
-            clearInterval(set3);
-            clearInterval(set4);
+            clearInterval(this.state.start1);
+            clearInterval(this.state.start2);
+            clearInterval(this.state.start3);
+            clearInterval(this.state.start4);
         }
     }
 
+    // service of button stop time
     stopWatch(event) {
         event.preventDefault();
 
@@ -65,10 +73,10 @@ class StopWatch extends Component {
             hour: 0
         })
 
-        clearInterval(set1);
-        clearInterval(set2);
-        clearInterval(set3);
-        clearInterval(set4);
+        clearInterval(this.state.start1);
+        clearInterval(this.state.start2);
+        clearInterval(this.state.start3);
+        clearInterval(this.state.start4);
     }
 
     tickDesec() {
