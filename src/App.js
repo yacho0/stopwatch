@@ -63,7 +63,7 @@ class App extends Component {
       minute: 0,
       hour: 0
     })
-    
+
     clearInterval(set1);
     clearInterval(set2);
     clearInterval(set3);
@@ -110,7 +110,7 @@ class App extends Component {
             {this.pad(this.state.hour, 2)}:
             {this.pad(this.state.minute, 2)}:
             {this.pad(this.state.secound, 2)}:
-            {this.pad(this.state.desec, 1)} //not need pad
+            {this.pad(this.state.desec, 1)}
           </p>
           <Interface
             stateRun={this.state.run}
