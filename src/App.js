@@ -24,15 +24,12 @@ class App extends Component {
   };
 
   constrolWatch(event) {
-
     event.preventDefault();
 
     const ds = 100;
     const sec = 1000;
     const min = 60000;
     const hour = 3600000;
-
-    console.log(this.state.run);
 
     this.setState((prevState) => {
       return {
@@ -42,7 +39,6 @@ class App extends Component {
     });
 
     if (this.state.run) {
-
       set1 = setInterval(() => this.tickDesec(), ds);
       set2 = setInterval(() => this.tickSec(), sec);
       set3 = setInterval(() => this.tickMin(), min);
@@ -67,7 +63,7 @@ class App extends Component {
       minute: 0,
       hour: 0
     })
-
+    
     clearInterval(set1);
     clearInterval(set2);
     clearInterval(set3);
@@ -84,7 +80,6 @@ class App extends Component {
     this.setState(state => ({
       secound: (state.secound + 1) % 60
     }));
-
   }
 
   tickMin() {
@@ -99,12 +94,24 @@ class App extends Component {
     }));
   }
 
+  // add zeros to numbers in front
+  pad(num, size) {
+    var s = num + ""; //have 1 lenght
+    while (s.length < size) s = "0" + s;  // 1 < 2 so +0
+    return s;
+  }
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <p>{this.state.hour} : {this.state.minute} : {this.state.secound} : {this.state.desec}</p>
+          <p>
+            {this.pad(this.state.hour, 2)}:
+            {this.pad(this.state.minute, 2)}:
+            {this.pad(this.state.secound, 2)}:
+            {this.pad(this.state.desec, 1)} //not need pad
+          </p>
           <Interface
             stateRun={this.state.run}
             stateStop={this.state.stop}
