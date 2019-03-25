@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import StopWatch from './StopWatch';
+import StopWatch from './StopWatch/StopWatch';
+import plus from './plus2.png'
 
 class App extends Component {
 
@@ -20,15 +21,15 @@ class App extends Component {
     const children = [];
 
     for (var i = 0; i < this.state.numChildren; i += 1) {
-      children.push(<StopWatch />);
+      children.push(<StopWatch key={i}/>);
     };
 
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo"alt="logo"  />
+          <img hidden src={logo} className="App-logo"alt="logo"  />
           {children}
-          <button onClick={this.onAddChild}>Add</button>
+          <img className="App-plus" alt="plus" src={plus} onClick={this.onAddChild} />
         </header>
       </div>
     );
