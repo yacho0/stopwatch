@@ -12,6 +12,7 @@ class App extends Component {
         <header className="App-header">
           <img hidden src={logo} className="App-logo"alt="logo"  />
           <Controller />
+          <p>Test 6.04.19</p>
         </header>
       </div>
     );
