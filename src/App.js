@@ -3,15 +3,6 @@ import logo from './logo.svg';
 import './App.css';
 import Controller from './Controller/Controller'
 
-
-const ComponentFunction = (props) => {
-
-const numberInside = (props.number + 1);
-
-  return <p>{numberInside}</p>
-
-}
-
 class App extends Component {
 
   render() {
